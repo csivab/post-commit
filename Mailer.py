@@ -1,2 +1,2 @@
 # This is a test 
-print {"hello, world Siva"}
+print {'hello, world Siva'}
