@@ -1,0 +1,103 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2022-04-30T09:47:39Z"
+  labels:
+    app: hook
+    app.kubernetes.io/component: hook
+    app.kubernetes.io/instance: hook
+  managedFields:
+  - apiVersion: build.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:openshift.io/generated-by: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+      f:spec:
+        f:output:
+          f:to:
+            .: {}
+            f:kind: {}
+            f:name: {}
+        f:postCommit:
+          f:command: {}
+        f:runPolicy: {}
+        f:source:
+          f:git:
+            .: {}
+            f:ref: {}
+            f:uri: {}
+          f:type: {}
+        f:strategy:
+          f:sourceStrategy:
+            .: {}
+            f:from:
+              .: {}
+              f:kind: {}
+              f:name: {}
+              f:namespace: {}
+          f:type: {}
+    manager: oc
+    operation: Update
+    time: "2022-04-30T09:50:04Z"
+  - apiVersion: build.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:triggers: {}
+      f:status:
+        f:lastVersion: {}
+    manager: openshift-apiserver
+    operation: Update
+    time: "2022-04-30T09:52:57Z"
+  name: hook
+  namespace: yyejei-post-commit
+  resourceVersion: "35850269"
+  selfLink: /apis/build.openshift.io/v1/namespaces/yyejei-post-commit/buildconfigs/hook
+  uid: bb2c7c0c-111e-4547-ae49-5834a023ea8b
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hook:latest
+  postCommit:
+    command:
+    - python Mailer.py
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: post
+      uri: http://github.com/csivab/post-commit
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: php:7.3
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: k2fiTwlssoQy4xa-jaRq
+    type: GitHub
+  - generic:
+      secret: k45Hwt4kGwBOVVn2wVcd
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/php@sha256:c649c4d2735cb8e03463b456aee1fa0610d5e80dc00c5efcdab08db83ff6d746
+    type: ImageChange
+status:
+  lastVersion: 3
